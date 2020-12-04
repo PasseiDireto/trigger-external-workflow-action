@@ -1,7 +1,6 @@
 """
 Triggers a Workflow from another repository using "repository_dispatch" event
 """
-import json
 import logging
 import os
 import sys
@@ -23,7 +22,6 @@ logging.basicConfig(
 
 install()
 logger = logging.getLogger("main")
-logger.info(os.environ)
 
 
 def get_endpoint(repo):
@@ -48,7 +46,6 @@ def start():
         "event_type": event,
         "client_payload": client_payload,
     }
-    json.dumps(body)
     endpoint = get_endpoint(repository)
     response = requests.post(endpoint, json=body, headers=headers)
     if not response.ok:
