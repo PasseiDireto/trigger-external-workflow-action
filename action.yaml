@@ -1,0 +1,15 @@
+name: 'Trigger External Workflow'
+description: 'Triggers a Workflow from another repository using "repository_dispatch" event'
+inputs:
+  repository:
+    description: 'GitHub repo as owner/repo'
+    required: true
+  event:
+    description: 'Event that is expected in the target repo'
+    required: true
+  github_pat:
+    description: 'GitHub Personal Access Token (PAT) with enough permissions to trigger the desired workflow'
+    required: true
+runs:
+  using: 'docker'
+  image: 'docker://passeidireto/trigger-external-workflow-action'
