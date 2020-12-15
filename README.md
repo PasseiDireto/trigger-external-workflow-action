@@ -35,10 +35,10 @@ jobs:
   update-docs:
     runs-on: ubuntu-latest
     steps:
-      - run: echo '${{ github.event.client_payload.PAYLOAD_AUTHOR }} sent this revision: ${{ github.event.client_payload.PAYLOAD_REVISION }}'
+      - run: echo '${{ github.event.client_payload.AUTHOR }} sent this revision: ${{ github.event.client_payload.REVISION }}'
 ```
 
-Make sure all your PAYLOAD variables are strings. GHA does not allow different types, such as booleans and integers. You can also use this action with [matrix strategy](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix), such as:
+Make sure all your PAYLOAD variables are strings. GHA does not allow different types, such as booleans and integers. Also aware that the `PAYLOAD_` preffix is removed before the payload is sent. You can also use this action with [matrix strategy](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix), such as:
 
 ```yaml
 on: [push, workflow_dispatch]
@@ -67,6 +67,7 @@ jobs:
 PRs welcome! This action is a Docker container, so it is very easy run it locally. Be sure you have all the required inputs represented as envrionment variables. For instance you will need a `INPUT_GITHUB_PAT` to represent the input `github_pat` the action will actually pass. Note the `INPUT_` preffix and the camel case representation.
 
 ### Development guide
+Be sure you have Python 3.9, otherwise Make won't run as it should. An easy solution is to run `make` commands inside a Docker container.
 
 Clone the repository using Git:
 ```sh
@@ -90,7 +91,7 @@ PAYLOAD_VAR2=123
 
 ```
 
-You can name it `.env` and then then run it the freshly built image:
+You can name it `.env` and then run it the freshly built image:
 
 ```sh
 docker run --rm --env-file=.env trigger-external-workflow-action
