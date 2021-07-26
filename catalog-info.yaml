@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: trigger-external-workflow-action
+  description: GitHub Action to trigger a workflow_dispatch on any repository during a pipeline.
+  labels:
+    system: github-actions
+  annotations:
+    github.com/project-slug: PasseiDireto/trigger-external-workflow-action
+    backstage.io/github-actions-id: PasseiDireto/trigger-external-workflow-action
+    backstage.io/techdocs-ref: github:https://github.com/PasseiDireto/trigger-external-workflow-action
+  tags:
+    - python
+    - action
+spec:
+  type: library
+  lifecycle: production
+  owner: data
